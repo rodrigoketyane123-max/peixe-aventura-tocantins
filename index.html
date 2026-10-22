@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Supabase JS SDK via CDN (carregado antes do main.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  
+  <!-- SEO & Metatags -->
+  <title>Peixe Aventura Tocantins | Pesca Esportiva, Praia da Tartaruga & Camping Fluvial</title>
+  <meta name="description" content="Explore Peixe - Tocantins: a capital do ecoturismo e da pesca esportiva no Rio Tocantins. Reserve guias de pesca de Tucunaré Azul, conheça a Praia da Tartaruga e viva acampamentos inesquecíveis em ilhas de água doce.">
+  <meta name="keywords" content="Pesca esportiva Peixe Tocantins, Rio Tocantins, Praia da Tartaruga, Tucunaré Azul, Camping Peixe TO, Passeio de Barco Peixe, Lago Peixe Angical">
+  <meta name="author" content="Peixe Aventura Tocantins">
+  <meta property="og:title" content="Peixe Aventura Tocantins | Pesca, Praias e Camping no Rio Tocantins">
+  <meta property="og:description" content="Portal oficial de turismo e expedições em Peixe - TO. Reserve piloteiros credenciados, passeios de chalana e acampamentos nas praias de água doce.">
+  <meta property="og:image" content="assets/images/praia-tartaruga-acampamento.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎣</text></svg>">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos CSS do Projeto -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": "Peixe - Tocantins (Rio Tocantins)",
+    "description": "Destino de destaque nacional para pesca esportiva de Tucunaré Azul, praias fluviais e camping de ecoturismo no Brasil.",
+    "touristType": ["Ecotourist", "SportsTourist"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Peixe",
+      "addressRegion": "TO",
+      "addressCountry": "BR"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ======================================================================
+       Site Header / Navbar
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="main-brand-logo">
+        <div class="brand-icon">
+          <i class="fa-solid fa-fish-fins"></i>
+        </div>
+        <div>
+          Peixe Aventura
+          <span class="brand-tag">Tocantins • Rio & Sol</span>
+        </div>
+      </a>
+
+      <!-- Menu Principal -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#experiencias" class="nav-link">Experiências</a></li>
+        <li><a href="#pesca" class="nav-link">Pesca Esportiva</a></li>
+        <li><a href="#praias" class="nav-link">Praia da Tartaruga</a></li>
+        <li><a href="#camping" class="nav-link">Camping & Ilhas</a></li>
+        <li><a href="#simulador" class="nav-link">Simular Pacote</a></li>
+        <li><a href="#galeria" class="nav-link">Galeria</a></li>
+        <li><a href="#chegar" class="nav-link">Como Chegar</a></li>
+        <li><a href="#faq" class="nav-link">Dúvidas</a></li>
+      </ul>
+
+      <!-- Ações do Header -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Alternar Modo Claro/Escuro" aria-label="Alternar Tema">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+        <a href="#simulador" class="btn btn-primary">
+          <i class="fa-solid fa-calendar-check"></i> Reservar
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       Hero Section com Pano de Fundo e Estatísticas
+       ====================================================================== -->
+  <section class="hero-section" id="inicio">
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-compass"></i> O Paraíso das Águas no Sul do Tocantins
+      </div>
+      <h1 class="hero-title">
+        Pesca de Troféus, Areias Brancas e <span>Aventura no Rio Tocantins</span>
+      </h1>
+      <p class="hero-description">
+        Descubra Peixe – TO: o destino definitivo para quem busca os lendários tucunarés azuis, o encanto das águas cristalinas da Praia da Tartaruga e a liberdade de acampar sob o céu estrelado do cerrado.
+      </p>
+
+      <div class="hero-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="#simulador" class="btn btn-accent" style="font-size: 1.05rem;">
+          <i class="fa-solid fa-bolt"></i> Montar Meu Pacote
+        </a>
+        <a href="#experiencias" class="btn btn-outline" style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.4);">
+          <i class="fa-solid fa-compass"></i> Ver Roteiros
+        </a>
+      </div>
+
+      <div class="hero-stats-row">
+        <div class="stat-item">
+          <h4>+30</h4>
+          <p>Piloteiros Credenciados</p>
+        </div>
+        <div class="stat-item">
+          <h4>100%</h4>
+          <p>Pesque e Solte (Cota Zero)</p>
+        </div>
+        <div class="stat-item">
+          <h4>300km²</h4>
+          <p>De Ilhas & Lago Navegável</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisor em Onda Fluvial -->
+    <svg class="hero-overlay-waves" viewBox="0 0 1440 120">
+      <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,48C840,43,960,53,1080,64C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path>
+    </svg>
+  </section>
+
+  <!-- ======================================================================
+       Buscador Rápido de Viagem
+       ====================================================================== -->
+  <div class="container booking-search-bar">
+    <form class="search-bar-inner" id="hero-quick-search">
+      <div class="search-field">
+        <label for="quick-type"><i class="fa-solid fa-location-dot"></i> Experiência Desejada</label>
+        <select id="quick-type">
+          <option value="bass-boat">Pesca Esportiva (Bass Boat)</option>
+          <option value="voadeira">Pesca em Voadeira 40HP</option>
+          <option value="praia-tartaruga">Praia da Tartaruga & Chalana</option>
+          <option value="camping-ilha">Camping Selvagem em Ilha</option>
+          <option value="chupe-tour">Cachoeira da Chupé</option>
+        </select>
+      </div>
+
+      <div class="search-field">
+        <label for="quick-date"><i class="fa-solid fa-calendar"></i> Data Prevista</label>
+        <input type="date" id="quick-date" value="2026-11-15">
+      </div>
+
+      <div class="search-field">
+        <label for="quick-people"><i class="fa-solid fa-users"></i> Pessoas</label>
+        <select id="quick-people">
+          <option value="1">1 Pessoa</option>
+          <option value="2" selected>2 Pessoas (Dupla de Pesca)</option>
+          <option value="3">3 Pessoas</option>
+          <option value="4">4 Pessoas (Família/Grupo)</option>
+          <option value="6">6+ Pessoas (Turma)</option>
+        </select>
+      </div>
+
+      <div class="search-field">
+        <label>&nbsp;</label>
+        <button type="submit" class="btn btn-primary" style="height: 48px;">
+          <i class="fa-solid fa-magnifying-glass"></i> Consultar Vagas
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ======================================================================
+       Widget em Tempo Real: Condições do Rio Tocantins em Peixe
+       ====================================================================== -->
+  <div class="container">
+    <div class="river-status-banner">
+      <div class="river-info-main">
+        <div class="river-pulse-dot"></div>
+        <div>
+          <strong>Condições Fluviais em Peixe - TO:</strong>
+          <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Atualizado há poucos minutos via Estação Hidrológica</span>
+        </div>
+      </div>
+      <div class="river-metrics">
+        <div class="metric-pill">
+          <i class="fa-solid fa-temperature-three-quarters" style="color: #e76f51;"></i>
+          <span>Água: <span class="highlight" id="live-river-temp">28.0°C</span></span>
+        </div>
+        <div class="metric-pill">
+          <i class="fa-solid fa-water" style="color: #048a81;"></i>
+          <span>Nível: <span class="highlight" id="live-river-level">Estável (Ideal p/ Pesca)</span></span>
+        </div>
+        <div class="metric-pill">
+          <i class="fa-solid fa-sun" style="color: #e5a93c;"></i>
+          <span>Clima: <span class="highlight" id="live-river-clima">Ensolarado (32°C)</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       Seção: Experiências e Roteiros em Destaque
+       ====================================================================== -->
+  <section class="section-padding" id="experiencias">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Roteiros Selecionados</span>
+        <h2 class="section-title">O Melhor de Peixe e do Rio Tocantins</h2>
+        <p class="section-desc">
+          Seja para bater iscas artificiais em busca do tucunaré gigante ou para relaxar nas praias de água doce com sua família, temos o roteiro ideal.
+        </p>
+      </div>
+
+      <!-- Abas de Filtro de Categoria -->
+      <div class="category-filter-tabs">
+        <button class="tab-btn active" data-category="all">Todos os Roteiros</button>
+        <button class="tab-btn" data-category="pesca">Pesca Esportiva</button>
+        <button class="tab-btn" data-category="passeio">Praias & Passeios</button>
+        <button class="tab-btn" data-category="camping">Acampamento & Camping</button>
+      </div>
+
+      <!-- Grid de Cards de Experiência -->
+      <div class="cards-grid">
+        
+        <!-- Card 1: Bass Boat Tucunaré -->
+        <div class="experience-card" data-category="pesca">
+          <div class="card-image-wrap">
+            <img src="assets/images/pesca-esportiva-peixe-to.jpg" alt="Pesca de Tucunaré Azul no Rio Tocantins">
+            <span class="card-badge">Alta Performance</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.9 (84)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Expedição Bass Boat: Tucunaré Azul</h3>
+            <p class="card-text">Diária completa com guia de pesca nativo, motor elétrico de pedal, sonar de última geração e navegação pelos melhores pontos do Rio Tocantins e lago Angical.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Barco Bass Boat 90HP c/ cadeiras giratórias</li>
+              <li><i class="fa-solid fa-circle-check"></i> Caixa térmica com gelo e água mineral</li>
+              <li><i class="fa-solid fa-circle-check"></i> Almoço ribeirinho no barranco incluso</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 1.200 <small style="font-size: 0.75rem; color: var(--text-muted);">/dia (até 2 pescadores)</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Praia da Tartaruga -->
+        <div class="experience-card" data-category="passeio">
+          <div class="card-image-wrap">
+            <img src="assets/images/praia-tartaruga-acampamento.jpg" alt="Praia da Tartaruga em Peixe Tocantins">
+            <span class="card-badge">Família & Lazer</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 5.0 (132)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Day Use na Ilha da Praia da Tartaruga</h3>
+            <p class="card-text">Travessia em voadeira homologada para a praia mais famosa do Tocantins. Areias alvas, quiosques com água de coco, peixe frito na brasa e águas calmas para crianças.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Travessia ida e volta com coletes homologados</li>
+              <li><i class="fa-solid fa-circle-check"></i> Guarda-sol de palha e cadeiras de praia</li>
+              <li><i class="fa-solid fa-circle-check"></i> Área com salva-vidas e banho seguro</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 80 <small style="font-size: 0.75rem; color: var(--text-muted);">/pessoa</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Camping em Ilha Selvagem -->
+        <div class="experience-card" data-category="camping">
+          <div class="card-image-wrap">
+            <img src="assets/images/praia-tartaruga-acampamento.jpg" alt="Camping no Rio Tocantins">
+            <span class="card-badge">Ecoturismo</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.8 (67)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Pernoite Camping em Ilha Fluvial</h3>
+            <p class="card-text">Acampe sob o céu mais estrelado do Brasil em um banco de areia privado no meio do Rio Tocantins. Experiência de fogueira, churrasco ribeirinho e segurança total.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Traslado náutico exclusivo para a ilha</li>
+              <li><i class="fa-solid fa-circle-check"></i> Aluguel de barraca impermeável e isolante térmico</li>
+              <li><i class="fa-solid fa-circle-check"></i> Apoio de rádio e suporte do piloteiro</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 120 <small style="font-size: 0.75rem; color: var(--text-muted);">/noite por pessoa</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Chalana ao Pôr do Sol -->
+        <div class="experience-card" data-category="passeio">
+          <div class="card-image-wrap">
+            <img src="assets/images/passeio-barco-por-do-sol.jpg" alt="Passeio de barco ao pôr do sol no Tocantins">
+            <span class="card-badge">Romântico & Grupos</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.9 (95)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Passeio de Chalana ao Pôr do Sol</h3>
+            <p class="card-text">Navegação contemplativa pelas ilhas do arquipélago fluvial de Peixe durante o entardecer tocantinense. Deck de madeira com música ambiente e degustação de petiscos.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> 2h30 de navegação pelo canal principal</li>
+              <li><i class="fa-solid fa-circle-check"></i> Parada para banho refrescante no rio</li>
+              <li><i class="fa-solid fa-circle-check"></i> Petiscos e bebidas geladas a bordo</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 150 <small style="font-size: 0.75rem; color: var(--text-muted);">/pessoa</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Cachoeira da Chupé -->
+        <div class="experience-card" data-category="passeio">
+          <div class="card-image-wrap">
+            <img src="assets/images/cachoeira-chupe-peixe.jpg" alt="Cachoeira da Chupé em Peixe">
+            <span class="card-badge">Aventura & Trilha</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.9 (53)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Expedição Cachoeira da Chupé</h3>
+            <p class="card-text">Trilha ecológica em meio à vegetação nativa do cerrado com chegada a piscinas naturais de águas esmeralda e quedas d'água revigorantes nas serras de Peixe.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Guia condutor ambiental credenciado</li>
+              <li><i class="fa-solid fa-circle-check"></i> Banho em poços naturais de água pura</li>
+              <li><i class="fa-solid fa-circle-check"></i> Seguro aventura e lanche de trilha incluso</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 160 <small style="font-size: 0.75rem; color: var(--text-muted);">/pessoa</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Voadeira Rápida para Peixes de Couro -->
+        <div class="experience-card" data-category="pesca">
+          <div class="card-image-wrap">
+            <img src="assets/images/cidade-peixe-orla-tocantins.jpg" alt="Orla e barcos de pesca em Peixe TO">
+            <span class="card-badge">Pesca Pesada</span>
+            <span class="card-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.8 (41)</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Pesca Noturna de Couro (Jaú & Surubim)</h3>
+            <p class="card-text">Aventura noturna nos poços profundos do Rio Tocantins em busca dos gigantes do fundo, acompanhado de piloteiros com décadas de tradição ribeirinha.</p>
+            <ul class="card-features-list">
+              <li><i class="fa-solid fa-circle-check"></i> Barco reforçado com holofotes subaquáticos</li>
+              <li><i class="fa-solid fa-circle-check"></i> Iscas vivas (tuviras e minhocuçu) inclusas</li>
+              <li><i class="fa-solid fa-circle-check"></i> Equipamento de suporte pesado a bordo</li>
+            </ul>
+            <div class="card-footer">
+              <div class="price-tag">
+                <span class="label">A partir de</span>
+                <span class="value">R$ 850 <small style="font-size: 0.75rem; color: var(--text-muted);">/noite</small></span>
+              </div>
+              <a href="#simulador" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cotar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Seção: Guia Interativo de Espécies do Rio Tocantins
+       ====================================================================== -->
+  <section class="section-padding" style="background: var(--bg-surface);" id="pesca">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Fauna Ictiológica</span>
+        <h2 class="section-title">Espécies Esportivas de Peixe – TO</h2>
+        <p class="section-desc">
+          O Rio Tocantins abriga uma das maiores diversidades de peixes esportivos do planeta. Pratique sempre o <strong>Pesque e Solte (Cota Zero)</strong> para preservar nossos troféus.
+        </p>
+      </div>
+
+      <div class="species-scroll-container">
+        <!-- Espécie 1 -->
+        <div class="species-box">
+          <div class="species-icon-wrap"><i class="fa-solid fa-fish"></i></div>
+          <h3 class="species-name">Tucunaré Azul</h3>
+          <p class="species-tech-name">Cichla piquiti</p>
+          <span class="species-badge">Até 65cm+ • Iscas de Superfície</span>
+        </div>
+
+        <!-- Espécie 2 -->
+        <div class="species-box">
+          <div class="species-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 class="species-name">Jaú Gigante</h3>
+          <p class="species-tech-name">Zungaro zungaro</p>
+          <span class="species-badge">Até 60kg+ • Poços Profundos</span>
+        </div>
+
+        <!-- Espécie 3 -->
+        <div class="species-box">
+          <div class="species-icon-wrap"><i class="fa-solid fa-water"></i></div>
+          <h3 class="species-name">Surubim Pintado</h3>
+          <p class="species-tech-name">Pseudoplatystoma corruscans</p>
+          <span class="species-badge">Corredeiras e Gargantas</span>
+        </div>
+
+        <!-- Espécie 4 -->
+        <div class="species-box">
+          <div class="species-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+          <h3 class="species-name">Bicuda Real</h3>
+          <p class="species-tech-name">Boulengerella cuvieri</p>
+          <span class="species-badge">Veloz • Saltos Acrobáticos</span>
+        </div>
+
+        <!-- Espécie 5 -->
+        <div class="species-box">
+          <div class="species-icon-wrap"><i class="fa-solid fa-sun"></i></div>
+          <h3 class="species-name">Apapá Amarelo</h3>
+          <p class="species-tech-name">Pellona castelnaeana</p>
+          <span class="species-badge">Dourado do Tocantins • Fly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Seção: Praia da Tartaruga & Acampamento
+       ====================================================================== -->
+  <section class="section-padding" id="praias">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+        <div>
+          <span class="section-tag" id="camping">Paraíso das Ilhas</span>
+          <h2 class="section-title">Praia da Tartaruga & Camping Náutico</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+            Localizada a apenas 15 minutos de voadeira do porto de Peixe, a <strong>Praia da Tartaruga</strong> é formada por extensas ilhas de areia fina que surgem no Rio Tocantins. Além de águas termais mornas e transparentes, o local oferece espaço seguro para quem deseja montar acampamento à beira d'água.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="background: rgba(4,138,129,0.1); color: var(--secondary); padding: 0.6rem; border-radius: 8px;">
+                <i class="fa-solid fa-tent"></i>
+              </div>
+              <div>
+                <strong>Camping Organizado & Sustentável:</strong>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Áreas demarcadas, ponto de energia solar, banheiros secos ecológicos e descarte correto de resíduos.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="background: rgba(229,169,60,0.1); color: var(--accent-gold); padding: 0.6rem; border-radius: 8px;">
+                <i class="fa-solid fa-sun"></i>
+              </div>
+              <div>
+                <strong>Temporada Oficial de Praia (Julho):</strong>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Grandes shows regionais, torneios de futevôlei de areia e gastronomia típica tocantinense.</p>
+              </div>
+            </div>
+          </div>
+          <a href="#simulador" class="btn btn-primary">
+            <i class="fa-solid fa-campground"></i> Agendar Acampamento ou Travessia
+          </a>
+        </div>
+
+        <div>
+          <img src="assets/images/praia-tartaruga-acampamento.jpg" alt="Aérea da Praia da Tartaruga e camping" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Simulador Inteligente de Orçamento & Reserva de Pacote
+       ====================================================================== -->
+  <section class="section-padding calculator-section" id="simulador">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Planejamento Instantâneo</span>
+        <h2 class="section-title">Simulador de Pacote & Orçamento</h2>
+        <p class="section-desc">
+          Personalize sua pescaria, acampamento ou passeio em Peixe - TO e receba o valor calculado em tempo real com garantia de atendimento direto.
+        </p>
+      </div>
+
+      <div class="calc-box-wrapper">
+        <!-- Formulário de Seleção -->
+        <div class="calc-form">
+          <div class="form-group">
+            <label for="calc-service"><i class="fa-solid fa-anchor"></i> Selecione a Atividade Principal:</label>
+            <select id="calc-service" class="form-control">
+              <option value="bass-boat">Diária Bass Boat + Piloteiro (R$ 1.200/dia)</option>
+              <option value="voadeira">Diária Voadeira 40HP + Piloteiro (R$ 850/dia)</option>
+              <option value="praia-tartaruga">Day Use + Travessia Praia da Tartaruga (R$ 80/pessoa)</option>
+              <option value="camping-ilha">Pernoite Camping em Ilha do Tocantins (R$ 120/pessoa)</option>
+              <option value="chalana-sunset">Passeio Chalana Pôr do Sol (R$ 150/pessoa)</option>
+              <option value="chupe-tour">Expedição Cachoeira da Chupé (R$ 160/pessoa)</option>
+            </select>
+          </div>
+
+          <div class="form-group-row">
+            <div class="form-group">
+              <label for="calc-days"><i class="fa-solid fa-clock"></i> Quantidade de Dias:</label>
+              <input type="number" id="calc-days" class="form-control" min="1" max="15" value="2">
+            </div>
+            <div class="form-group">
+              <label for="calc-guests"><i class="fa-solid fa-user-group"></i> Quantidade de Pessoas:</label>
+              <input type="number" id="calc-guests" class="form-control" min="1" max="10" value="2">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-plus-circle"></i> Serviços Adicionais Recomendados:</label>
+            <div class="checkbox-addons-list">
+              <label class="custom-checkbox-label">
+                <span><input type="checkbox" id="addon-lunch" checked> Almoço Ribeirinho Típico no Barranco (+ R$ 90/dia por pessoa)</span>
+                <i class="fa-solid fa-utensils" style="color: var(--secondary);"></i>
+              </label>
+
+              <label class="custom-checkbox-label">
+                <span><input type="checkbox" id="addon-tackle"> Aluguel de Tralha de Pesca Pro (Varas, Carretilhas e Iscas) (+ R$ 150/dia)</span>
+                <i class="fa-solid fa-fish" style="color: var(--primary);"></i>
+              </label>
+
+              <label class="custom-checkbox-label">
+                <span><input type="checkbox" id="addon-camping"> Kit Camping Iluminado (Barraca 4P, Colchão e Lanterna Solar) (+ R$ 80/dia)</span>
+                <i class="fa-solid fa-campground" style="color: var(--accent-gold);"></i>
+              </label>
+
+              <label class="custom-checkbox-label">
+                <span><input type="checkbox" id="addon-transfer"> Traslado Náutico Privativo para Ilhas Remotas (+ R$ 60/pessoa)</span>
+                <i class="fa-solid fa-ship" style="color: #048a81;"></i>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel de Resumo Dinâmico -->
+        <div class="calc-summary-panel">
+          <div>
+            <div class="summary-header">
+              <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #ffde59;">Resumo da Cotação</span>
+              <h3 id="summary-service-name">Diária Bass Boat + Piloteiro</h3>
+            </div>
+
+            <ul class="summary-items-list">
+              <li>
+                <span>Período Selecionado:</span>
+                <strong id="summary-days-text">2 dia(s)</strong>
+              </li>
+              <li>
+                <span>Participantes:</span>
+                <strong id="summary-guests-text">2 pessoa(s)</strong>
+              </li>
+              <li>
+                <span>Adicionais Selecionados:</span>
+                <strong id="summary-addons-price">R$ 360</strong>
+              </li>
+              <li>
+                <span>Sinal de Reserva (30% via Pix):</span>
+                <strong id="summary-deposit-price" style="color: #ffde59;">R$ 828</strong>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="summary-total-box">
+              <div>
+                <span style="font-size: 0.8rem; color: #cbd5e1; text-transform: uppercase;">Valor Total Estimado</span>
+                <div class="total-number" id="summary-total-price">R$ 2.760</div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
+              <a href="#" id="calc-whatsapp-btn" class="btn btn-accent" target="_blank" style="width: 100%;">
+                <i class="fa-brands fa-whatsapp"></i> Confirmar Vaga no WhatsApp
+              </a>
+              <button type="button" id="calc-voucher-btn" class="btn btn-outline" style="border-color: rgba(255,255,255,0.4); color: white; width: 100%;">
+                <i class="fa-solid fa-qrcode"></i> Gerar Voucher Pix
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Galeria de Fotos em Alta Resolução (com Lightbox)
+       ====================================================================== -->
+  <section class="section-padding" id="galeria">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Belezas Visuais</span>
+        <h2 class="section-title">Galeria de Peixe e Rio Tocantins</h2>
+        <p class="section-desc">Clique nas imagens para expandir em tela cheia.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/images/pesca-esportiva-peixe-to.jpg" alt="Pesca do Tucunaré Azul no Rio Tocantins">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">🎣 Pescador esportivo com Tucunaré Azul no Rio Tocantins</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/praia-tartaruga-acampamento.jpg" alt="Aérea da Praia da Tartaruga e camping">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">🏖️ Vista aérea da Praia da Tartaruga e áreas de camping</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/cidade-peixe-orla-tocantins.jpg" alt="Orla histórica da cidade de Peixe Tocantins">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">🏛️ Orla histórica e cais de embarque de Peixe - TO</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/passeio-barco-por-do-sol.jpg" alt="Passeio de chalana ao pôr do sol no Tocantins">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">🌅 Passeio de chalana ao pôr do sol nas ilhas</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/cachoeira-chupe-peixe.jpg" alt="Cachoeira da Chupé em Peixe">
+          <div class="gallery-overlay">
+            <span class="gallery-caption">💧 Piscinas naturais e quedas d'água na Cachoeira da Chupé</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Guia Logístico: Como Chegar a Peixe - TO
+       ====================================================================== -->
+  <section class="section-padding" style="background: var(--bg-surface);" id="chegar">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Acesso e Rotas</span>
+        <h2 class="section-title">Como Chegar a Peixe – Tocantins</h2>
+        <p class="section-desc">
+          Localizada no sul do Tocantins com acesso rodoviário pavimentado de excelente qualidade.
+        </p>
+      </div>
+
+      <div class="route-grid">
+        <!-- Rota 1 -->
+        <div class="route-card">
+          <span class="route-badge">Rota Aérea Principal</span>
+          <h3>A partir de Palmas (Capital)</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Desembarque no Aeroporto de Palmas (PMW) e siga rumo sul:</p>
+          <ul class="route-steps-list">
+            <li><i class="fa-solid fa-car" style="color: var(--secondary);"></i> Distância aproximada: <strong>300 km</strong> asfaltados.</li>
+            <li><i class="fa-solid fa-road" style="color: var(--secondary);"></i> Rodovias: BR-010 e TO-070 via Porto Nacional e Fátima.</li>
+            <li><i class="fa-solid fa-clock" style="color: var(--secondary);"></i> Tempo médio de viagem: ~3h30 de carro ou van.</li>
+          </ul>
+        </div>
+
+        <!-- Rota 2 -->
+        <div class="route-card">
+          <span class="route-badge">Mais Rápida e Próxima</span>
+          <h3>A partir de Gurupi (Polo Regional)</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Para quem já está ou vem pelo eixo sul da BR-153:</p>
+          <ul class="route-steps-list">
+            <li><i class="fa-solid fa-car" style="color: var(--secondary);"></i> Distância de apenas <strong>75 km</strong>.</li>
+            <li><i class="fa-solid fa-road" style="color: var(--secondary);"></i> Acesso direto via BR-242 e TO-181.</li>
+            <li><i class="fa-solid fa-clock" style="color: var(--secondary);"></i> Tempo médio de viagem: ~50 minutos de carro.</li>
+          </ul>
+        </div>
+
+        <!-- Rota 3 -->
+        <div class="route-card">
+          <span class="route-badge">Coordenadas & Apoio</span>
+          <h3>Cais de Embarque de Peixe</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Ponto de encontro com os piloteiros e barqueiros credenciados:</p>
+          <ul class="route-steps-list">
+            <li><i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> Orla Beira-Rio, Centro Histórico de Peixe - TO.</li>
+            <li><i class="fa-solid fa-square-parking" style="color: var(--secondary);"></i> Estacionamento privativo para carros e trailers.</li>
+            <li><i class="fa-solid fa-phone" style="color: var(--secondary);"></i> Recepção com rádio comunicador e guias.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FAQ / Perguntas Frequentes
+       ====================================================================== -->
+  <section class="section-padding" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tire Suas Dúvidas</span>
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <p class="section-desc">Tudo o que você precisa saber antes de embarcar para o Rio Tocantins.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- Pergunta 1 -->
+        <div class="faq-item active">
+          <button class="faq-question">
+            Qual é a melhor época para a pesca esportiva do Tucunaré Azul em Peixe?
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            A pesca do Tucunaré Azul no reservatório de Peixe Angical é produtiva <strong>o ano todo</strong>! No entanto, o período entre <strong>maio e novembro</strong> oferece as águas mais límpidas e clima seco, com peixes extremamente ativos na superfície (zaras e poppers).
+          </div>
+        </div>
+
+        <!-- Pergunta 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            Quando funciona a temporada da Praia da Tartaruga?
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            A alta temporada oficial ocorre durante o mês de <strong>julho</strong>, com quiosques montados, shows e salva-vidas. Contudo, os bancos de areia e ilhas para banho e camping permanecem deslumbrantes e visitáveis entre <strong>junho e setembro</strong>.
+          </div>
+        </div>
+
+        <!-- Pergunta 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            É obrigatório ter licença de pesca ambiental?
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            Sim! Todo pescador amador deve portar a <strong>Licença de Pesca Amadora</strong> válida (emitida pelo Naturatins ou Ministério da Pesca). Além disso, apoiamos a política de Cota Zero (Pesque e Solte) para todos os peixes esportivos nativos.
+          </div>
+        </div>
+
+        <!-- Pergunta 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            É seguro acampar nas ilhas fluviais do Rio Tocantins?
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            Sim, quando realizado em pontos credenciados e acompanhado por piloteiros locais. Fornecemos orientações de conduta (evitar andar descalço na água rasa devido a arraias, uso de calçados apropriados e armazenamento seguro de alimentos).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       Footer
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 1rem; color: white;">
+            <div class="brand-icon"><i class="fa-solid fa-fish-fins"></i></div>
+            Peixe Aventura
+          </div>
+          <p>
+            Plataforma dedicada ao fomento do turismo sustentável, valorização dos guias ribeirinhos e preservação do Rio Tocantins na cidade de Peixe - TO.
+          </p>
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="#" style="background: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" style="background: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="background: rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul class="footer-links-list">
+            <li><a href="#experiencias">Experiências</a></li>
+            <li><a href="#pesca">Pesca Esportiva</a></li>
+            <li><a href="#praias">Praia da Tartaruga</a></li>
+            <li><a href="#camping">Camping Fluvial</a></li>
+            <li><a href="#simulador">Simular Pacote</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Apoio & Órgãos</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://naturatins.to.gov.br/" target="_blank" rel="noopener">Naturatins (Licenças)</a></li>
+            <li><a href="https://www.marinha.mil.br/" target="_blank" rel="noopener">Capitania dos Portos</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Prefeitura de Peixe - TO</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Assoc. Barqueiros de Peixe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atendimento</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent-gold);"></i> Orla Fluvial, Peixe - Tocantins</p>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="color: var(--accent-gold);"></i> (63) 99999-9999</p>
+          <p style="font-size: 0.9rem;"><i class="fa-solid fa-envelope" style="color: var(--accent-gold);"></i> contato@peixeaventura.com.br</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Peixe Aventura Tocantins. Todos os direitos reservados. Pesque & Solte.</p>
+        <p>Desenvolvido para promoção do Ecoturismo de Peixe - TO.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       Botão Flutuante de Atendimento WhatsApp Oficial
+       ====================================================================== -->
+  <a href="https://wa.me/5563999999999?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20passeios%2C%20pesca%20e%20camping%20em%20Peixe-TO" target="_blank" class="floating-whatsapp-btn" id="floating-whatsapp" aria-label="Falar no WhatsApp Oficial">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Fale com os Guias de Peixe</span>
+  </a>
+
+  <!-- ======================================================================
+       Modal de Lightbox para Fotos em Alta Resolução
+       ====================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close-btn">&times;</button>
+      <img src="" alt="Ampliação de foto de Peixe - TO" id="lightbox-img">
+      <div class="lightbox-caption-text" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       Modal de Voucher & Confirmação Pix
+       ====================================================================== -->
+  <div class="modal-overlay" id="voucher-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="voucher-modal-close">&times;</button>
+      <div style="text-align: center;">
+        <div style="width: 55px; height: 55px; background: rgba(4,138,129,0.15); color: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem auto;">
+          <i class="fa-solid fa-ticket"></i>
+        </div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 0.3rem;">Pré-Reserva Gerada!</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Garantia de vaga com piloteiro ou estrutura de camping.</p>
+        <div id="modal-voucher-code" style="margin-top: 0.5rem; font-size: 0.8rem; font-family: monospace; background: rgba(4,138,129,0.1); color: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 999px; display: inline-block; letter-spacing: 1px;">Gerando código...</div>
+      </div>
+
+      <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-sm); margin: 1.25rem 0; font-size: 0.9rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted);">Serviço:</span>
+          <strong id="modal-service-name">Diária Bass Boat</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted);">Configuração:</span>
+          <strong id="modal-duration">2 dia(s) / 2 pessoa(s)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-muted);">Valor Total:</span>
+          <strong id="modal-total" style="color: var(--primary);">R$ 2.760</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 0.5rem; color: #10b981;">
+          <span>Sinal (30% para Travar Data):</span>
+          <strong id="modal-deposit" style="font-size: 1.1rem;">R$ 828</strong>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <div class="pix-qr-box">
+          <!-- QR Code SVG ilustrativo -->
+          <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="white"/>
+            <rect x="10" y="10" width="25" height="25" fill="#00487C"/>
+            <rect x="15" y="15" width="15" height="15" fill="white"/>
+            <rect x="18" y="18" width="9" height="9" fill="#00487C"/>
+            <rect x="65" y="10" width="25" height="25" fill="#00487C"/>
+            <rect x="70" y="15" width="15" height="15" fill="white"/>
+            <rect x="73" y="18" width="9" height="9" fill="#00487C"/>
+            <rect x="10" y="65" width="25" height="25" fill="#00487C"/>
+            <rect x="15" y="70" width="15" height="15" fill="white"/>
+            <rect x="18" y="73" width="9" height="9" fill="#00487C"/>
+            <rect x="42" y="42" width="16" height="16" fill="#048A81"/>
+            <rect x="45" y="15" width="10" height="10" fill="#00487C"/>
+            <rect x="15" y="45" width="10" height="10" fill="#00487C"/>
+            <rect x="75" y="45" width="10" height="10" fill="#00487C"/>
+            <rect x="45" y="75" width="10" height="10" fill="#00487C"/>
+          </svg>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">PIX Instantâneo • Banco Central</div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="copy-pix-btn" style="width: 100%; margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-copy"></i> Copiar Código Pix Copia e Cola
+        </button>
+        <div id="pix-copy-feedback" style="display: none; color: #10b981; font-weight: 600; font-size: 0.85rem;">
+          ✓ Código Pix copiado para a área de transferência!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>
