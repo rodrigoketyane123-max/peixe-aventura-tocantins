@@ -4,6 +4,7 @@
   "description": "Portal de Ecoturismo, Pesca Esportiva e Acampamentos no Rio Tocantins em Peixe - TO integrado ao Supabase",
   "main": "server.js",
   "scripts": {
+    "build": "echo 'Build OK'",
     "start": "node server.js",
     "dev": "node server.js",
     "db:test": "node scripts/test-supabase.js",

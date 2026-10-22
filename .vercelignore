@@ -1,0 +1,9 @@
+# Arquivos e pastas a ignorar no build e deploy da Vercel
+.env
+.env.example
+.git
+.github
+node_modules
+scripts/
+supabase_schema.sql
+prd.md

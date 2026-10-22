@@ -24,108 +24,47 @@ const MIME_TYPES = {
   '.webp': 'image/webp'
 };
 
+const configHandler = require('./api/config');
+const experienciasHandler = require('./api/experiencias');
+const especiesHandler = require('./api/especies');
+const rioHandler = require('./api/rio');
+const reservasHandler = require('./api/reservas');
+const indexApiHandler = require('./api/index');
+
 // ============================================================
-// ROTEADOR DE APIs
+// ROTEADOR DE APIs (Compatível com Vercel Serverless Functions)
 // ============================================================
 async function handleApiRequest(req, res, urlPath) {
-  res.setHeader('Content-Type', 'application/json; charset=UTF-8');
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  req.query = Object.fromEntries(urlObj.searchParams.entries());
 
   try {
-    // GET /api/config → retorna URL e anon_key para o Supabase JS do browser
-    if (urlPath === '/api/config' && req.method === 'GET') {
-      res.writeHead(200);
-      return res.end(JSON.stringify({
-        supabase_url: db.SUPABASE_URL,
-        supabase_anon_key: db.SUPABASE_ANON_KEY
-      }));
+    if (urlPath === '/api/config') return await configHandler(req, res);
+    if (urlPath === '/api/especies') return await especiesHandler(req, res);
+    if (urlPath === '/api/rio') return await rioHandler(req, res);
+
+    const expMatch = urlPath.match(/^\/api\/experiencias(?:\/(.+))?$/);
+    if (expMatch) {
+      if (expMatch[1]) req.query.slug = expMatch[1];
+      return await experienciasHandler(req, res);
     }
 
-    // GET /api/experiencias?categoria=pesca|passeio|camping|all
-    if (urlPath === '/api/experiencias' && req.method === 'GET') {
-      const params = new URL(`http://localhost${req.url}`).searchParams;
-      const categoria = params.get('categoria') || 'all';
-      try {
-        const data = await db.getExperiencias(categoria);
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: true, data: data || [] }));
-      } catch (e) {
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: false, data: [], error: e.message }));
-      }
+    const resMatch = urlPath.match(/^\/api\/reservas(?:\/(.+))?$/);
+    if (resMatch) {
+      if (resMatch[1]) req.query.voucher = resMatch[1];
+      return await reservasHandler(req, res);
     }
 
-    // GET /api/experiencias/:slug
-    const slugMatch = urlPath.match(/^\/api\/experiencias\/(.+)$/);
-    if (slugMatch && req.method === 'GET') {
-      try {
-        const data = await db.getExperienciaBySlug(slugMatch[1]);
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: true, data }));
-      } catch (e) {
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: false, data: null, error: e.message }));
-      }
+    if (urlPath === '/api' || urlPath === '/api/') {
+      return await indexApiHandler(req, res);
     }
 
-    // GET /api/especies
-    if (urlPath === '/api/especies' && req.method === 'GET') {
-      try {
-        const data = await db.getEspeciesPeixes();
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: true, data: data || [] }));
-      } catch (e) {
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: false, data: [], error: e.message }));
-      }
-    }
-
-    // GET /api/rio
-    if (urlPath === '/api/rio' && req.method === 'GET') {
-      try {
-        const data = await db.getCondicoesRio();
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: true, data }));
-      } catch (e) {
-        res.writeHead(200);
-        return res.end(JSON.stringify({ ok: false, data: null, error: e.message }));
-      }
-    }
-
-    // POST /api/reservas
-    if (urlPath === '/api/reservas' && req.method === 'POST') {
-      let body = '';
-      req.on('data', chunk => { body += chunk.toString(); });
-      req.on('end', async () => {
-        try {
-          const reservaData = JSON.parse(body);
-          const data = await db.criarReserva(reservaData);
-          res.writeHead(201);
-          return res.end(JSON.stringify({ ok: true, data }));
-        } catch (err) {
-          res.writeHead(400);
-          return res.end(JSON.stringify({ ok: false, error: err.message }));
-        }
-      });
-      return;
-    }
-
-    // GET /api/reservas/:voucher
-    const voucherMatch = urlPath.match(/^\/api\/reservas\/(.+)$/);
-    if (voucherMatch && req.method === 'GET') {
-      const data = await db.getReservaByVoucher(voucherMatch[1]);
-      res.writeHead(200);
-      return res.end(JSON.stringify({ ok: true, data }));
-    }
-
-    // Rota não encontrada
-    res.writeHead(404);
-    return res.end(JSON.stringify({ ok: false, error: 'Endpoint não encontrado' }));
-
+    res.writeHead(404, { 'Content-Type': 'application/json; charset=UTF-8' });
+    res.end(JSON.stringify({ ok: false, error: 'Endpoint não encontrado' }));
   } catch (err) {
-    console.error('[API Error]', err.message);
-    res.writeHead(500);
-    return res.end(JSON.stringify({ ok: false, error: err.message }));
+    console.error('[API Router Error]', err.message);
+    res.writeHead(500, { 'Content-Type': 'application/json; charset=UTF-8' });
+    res.end(JSON.stringify({ ok: false, error: err.message }));
   }
 }
 
@@ -136,7 +75,7 @@ const server = http.createServer(async (req, res) => {
   const urlPath = decodeURI(req.url.split('?')[0]);
 
   // Rotear requisições da API
-  if (urlPath.startsWith('/api/')) {
+  if (urlPath.startsWith('/api/') || urlPath === '/api') {
     return handleApiRequest(req, res, urlPath);
   }
 

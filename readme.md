@@ -68,19 +68,28 @@ Baseado no [prd.md](prd.md), a plataforma é organizada em quatro eixos centrais
 
 ```text
 meu projeto 2/
+├── api/                                     # Serverless Functions (Vercel & Node.js)
+│   ├── _utils.js                            # Helpers HTTP e parse de requisições
+│   ├── config.js                            # Endpoint público de credenciais
+│   ├── experiencias.js                      # GET /api/experiencias e /:slug
+│   ├── especies.js                          # GET /api/especies
+│   ├── rio.js                               # GET /api/rio (métricas em tempo real)
+│   ├── reservas.js                          # POST /api/reservas e GET /:voucher
+│   └── index.js                             # Catálogo e health check da API
 ├── assets/
-│   └── images/
-│       ├── cachoeira-chupe-peixe.jpg        # Ecoturismo e Cachoeira da Chupé
-│       ├── cidade-peixe-orla-tocantins.jpg   # Orla histórica e cais da cidade de Peixe
-│       ├── passeio-barco-por-do-sol.jpg     # Chalana ao pôr do sol no Rio Tocantins
-│       ├── pesca-esportiva-peixe-to.jpg      # Pesca esportiva do Tucunaré Azul
-│       └── praia-tartaruga-acampamento.jpg   # Aérea da Praia da Tartaruga e camping
+│   └── images/                              # Fotos do destino em alta definição
 ├── css/
 │   └── style.css                            # Folha de estilo e Design System moderno
 ├── js/
-│   └── main.js                              # Lógica interativa, simulador, temas e WhatsApp
+│   ├── main.js                              # Lógica interativa, simulador e consumo da API
+│   └── supabase-config.js                   # Módulo central de consultas ao Supabase
+├── scripts/
+│   ├── apply-schema.js                      # Script de inicialização e seed no Supabase
+│   └── test-supabase.js                     # Testador de conexão e contagem de tabelas
+├── supabase_schema.sql                      # DDL do PostgreSQL + RLS + Dados iniciais
+├── vercel.json                              # Configuração de rotas e headers para Vercel
 ├── index.html                               # Aplicação web completa do portal
-├── server.js                                # Servidor web nativo Node.js ultrarrápido
+├── server.js                                # Servidor web nativo Node.js com roteador de API
 ├── prd.md                                   # Documento de Requisitos do Produto (PRD)
 └── readme.md                                # Documentação e apresentação do projeto
 ```
@@ -89,16 +98,41 @@ meu projeto 2/
 
 ## 🚀 Como Executar o Projeto Localmente
 
-### Opção 1: Servidor Local Node.js (Recomendado)
-Abra o terminal na pasta do projeto e execute:
+### 1. Instalar Dependências e Configurar Ambiente
 ```bash
+npm install
+```
+Certifique-se de que o arquivo `.env` contenha as variáveis do Supabase:
+```env
+SUPABASE_URL=https://seu-projeto.supabase.co
+SUPABASE_ANON_KEY=sua-anon-key-aqui
+PORT=3000
+```
+
+### 2. Testar Conexão com o Supabase
+```bash
+npm run db:test
+```
+
+### 3. Iniciar Servidor de Desenvolvimento
+```bash
+npm run dev
+# ou
 node server.js
 ```
-Em seguida, abra o navegador e acesse:
+Acesse no navegador:
 👉 **[http://localhost:3000](http://localhost:3000)**
 
-### Opção 2: Abertura Direta
-Dê dois cliques no arquivo `index.html` ou abra-o em qualquer navegador moderno (Chrome, Edge, Firefox, Safari).
+---
+
+## ☁️ Deploy na Vercel (Produção)
+
+O projeto está 100% pronto para deploy na **Vercel** com Serverless Functions nativas:
+1. Conecte este repositório no dashboard da [Vercel](https://vercel.com).
+2. Adicione as variáveis de ambiente em **Settings → Environment Variables**:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+3. Clique em **Deploy**. A Vercel servirá tanto o frontend estático otimizado quanto os endpoints `/api/*` automaticamente.
 
 ---
 

@@ -12,15 +12,18 @@ const { createClient } = require('@supabase/supabase-js');
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    '[Supabase Config] SUPABASE_URL e SUPABASE_ANON_KEY são obrigatórias no .env'
-  );
+let supabase = null;
+if (supabaseUrl && supabaseAnonKey) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      auth: { persistSession: false }
+    });
+  } catch (err) {
+    console.warn('[Supabase Config] Erro ao instanciar cliente:', err.message);
+  }
+} else {
+  console.warn('[Supabase Config] SUPABASE_URL ou SUPABASE_ANON_KEY não encontradas nas variáveis de ambiente.');
 }
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: { persistSession: false }
-});
 
 // ============================================================
 // HELPERS DE DADOS
@@ -28,6 +31,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 
 /** Lista todas as experiências ativas, ordenadas pelo campo "ordem" */
 async function getExperiencias(categoria = null) {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   let query = supabase
     .from('experiencias')
     .select('*')
@@ -45,6 +49,7 @@ async function getExperiencias(categoria = null) {
 
 /** Busca uma experiência pelo slug */
 async function getExperienciaBySlug(slug) {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   const { data, error } = await supabase
     .from('experiencias')
     .select('*')
@@ -56,6 +61,7 @@ async function getExperienciaBySlug(slug) {
 
 /** Lista espécies de peixes, ordenadas */
 async function getEspeciesPeixes() {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   const { data, error } = await supabase
     .from('especies_peixes')
     .select('*')
@@ -66,6 +72,7 @@ async function getEspeciesPeixes() {
 
 /** Busca o registro mais recente das condições do Rio Tocantins */
 async function getCondicoesRio() {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   const { data, error } = await supabase
     .from('condicoes_rio')
     .select('*')
@@ -78,6 +85,7 @@ async function getCondicoesRio() {
 
 /** Cria uma nova reserva no banco */
 async function criarReserva(reservaData) {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   const codigoVoucher = 'PAT-' + Date.now().toString(36).toUpperCase();
 
   const payload = {
@@ -108,6 +116,7 @@ async function criarReserva(reservaData) {
 
 /** Busca uma reserva pelo código do voucher */
 async function getReservaByVoucher(codigoVoucher) {
+  if (!supabase) throw new Error('Supabase não conectado. Defina SUPABASE_URL e SUPABASE_ANON_KEY.');
   const { data, error } = await supabase
     .from('reservas')
     .select('*')
