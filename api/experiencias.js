@@ -2,7 +2,7 @@
  * Endpoint Vercel Serverless: GET /api/experiencias e GET /api/experiencias/:slug
  */
 const { sendJson } = require('./_utils');
-const db = require('../js/supabase-config');
+const db = require('./_db');
 
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
@@ -18,8 +18,15 @@ module.exports = async (req, res) => {
     const categoria = req.query?.categoria || 'all';
 
     if (slug) {
-      const data = await db.getExperienciaBySlug(slug);
-      return sendJson(res, 200, { ok: true, data });
+      try {
+        const data = await db.getExperienciaBySlug(slug);
+        if (!data) {
+          return sendJson(res, 404, { ok: false, data: null, error: 'Experiência não encontrada' });
+        }
+        return sendJson(res, 200, { ok: true, data });
+      } catch (err) {
+        return sendJson(res, 404, { ok: false, data: null, error: 'Experiência não encontrada' });
+      }
     }
 
     const data = await db.getExperiencias(categoria);

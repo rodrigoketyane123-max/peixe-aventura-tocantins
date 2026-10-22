@@ -7,3 +7,5 @@ node_modules
 scripts/
 supabase_schema.sql
 prd.md
+server.js
+DEPLOY_VERCEL.md

@@ -2,7 +2,7 @@
  * Endpoint Vercel Serverless: GET /api/rio
  */
 const { sendJson } = require('./_utils');
-const db = require('../js/supabase-config');
+const db = require('./_db');
 
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {

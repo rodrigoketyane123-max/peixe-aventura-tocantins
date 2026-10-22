@@ -10,6 +10,9 @@
     "db:test": "node scripts/test-supabase.js",
     "db:apply": "node scripts/apply-schema.js"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "dotenv": "^16.4.7"
