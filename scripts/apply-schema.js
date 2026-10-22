@@ -224,11 +224,11 @@ const SEED_EXPERIENCIAS = [
 ];
 
 const SEED_ESPECIES = [
-  { nome_popular: 'Tucunaré Azul', nome_cientifico: 'Cichla piquiti', porte_info: 'Até 65cm+ • Iscas de Superfície', habitat_dica: 'Estruturas de paus e pedrais', icone: 'fa-fish', ordem: 1 },
-  { nome_popular: 'Jaú Gigante', nome_cientifico: 'Zungaro zungaro', porte_info: 'Até 60kg+ • Poços Profundos', habitat_dica: 'Fundo de corredeiras e poços', icone: 'fa-shield-halved', ordem: 2 },
-  { nome_popular: 'Surubim Pintado', nome_cientifico: 'Pseudoplatystoma corruscans', porte_info: 'Corredeiras e Gargantas', habitat_dica: 'Águas correntes e canais', icone: 'fa-water', ordem: 3 },
-  { nome_popular: 'Bicuda Real', nome_cientifico: 'Boulengerella cuvieri', porte_info: 'Veloz • Saltos Acrobáticos', habitat_dica: 'Remansos e superfícies', icone: 'fa-bolt', ordem: 4 },
-  { nome_popular: 'Apapá Amarelo', nome_cientifico: 'Pellona castelnaeana', porte_info: 'Dourado do Tocantins • Fly', habitat_dica: 'Superfície de canais abertos', icone: 'fa-sun', ordem: 5 }
+  { nome_popular: 'Tucunaré Azul', nome_cientifico: 'Cichla piquiti', porte_info: 'Até 65cm+ • Iscas de Superfície', habitat_dica: 'Estruturas de paus e pedrais', imagem_url: 'assets/images/peixe-tucunare-azul.jpg', icone: 'fa-fish', ordem: 1 },
+  { nome_popular: 'Jaú Gigante', nome_cientifico: 'Zungaro zungaro', porte_info: 'Até 60kg+ • Poços Profundos', habitat_dica: 'Fundo de corredeiras e poços', imagem_url: 'assets/images/peixe-jau-gigante.jpg', icone: 'fa-shield-halved', ordem: 2 },
+  { nome_popular: 'Surubim Pintado', nome_cientifico: 'Pseudoplatystoma corruscans', porte_info: 'Corredeiras e Gargantas', habitat_dica: 'Águas correntes e canais', imagem_url: 'assets/images/peixe-surubim-pintado.jpg', icone: 'fa-water', ordem: 3 },
+  { nome_popular: 'Bicuda Real', nome_cientifico: 'Boulengerella cuvieri', porte_info: 'Veloz • Saltos Acrobáticos', habitat_dica: 'Remansos e superfícies', imagem_url: 'assets/images/peixe-bicuda-real.jpg', icone: 'fa-bolt', ordem: 4 },
+  { nome_popular: 'Apapá Amarelo', nome_cientifico: 'Pellona castelnaeana', porte_info: 'Dourado do Tocantins • Fly', habitat_dica: 'Superfície de canais abertos', imagem_url: 'assets/images/peixe-apapa-amarelo.jpg', icone: 'fa-sun', ordem: 5 }
 ];
 
 async function executeSql(sql, description) {

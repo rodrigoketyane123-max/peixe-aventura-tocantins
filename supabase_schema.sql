@@ -33,10 +33,11 @@ CREATE TABLE IF NOT EXISTS public.experiencias (
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.especies_peixes (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    nome_popular TEXT NOT NULL,
+    nome_popular TEXT UNIQUE NOT NULL,
     nome_cientifico TEXT NOT NULL,
     porte_info TEXT NOT NULL,
     habitat_dica TEXT,
+    imagem_url TEXT,
     icone TEXT DEFAULT 'fa-fish',
     ordem INT DEFAULT 0,
     created_at TIMESTAMPTZ DEFAULT now()
@@ -206,15 +207,22 @@ VALUES
 )
 ON CONFLICT (slug) DO NOTHING;
 
--- Inserir Espécies de Peixes
-INSERT INTO public.especies_peixes (nome_popular, nome_cientifico, porte_info, habitat_dica, icone, ordem)
+-- Inserir / Atualizar Espécies de Peixes (com fotos e sem duplicatas)
+-- Caso já existam duplicatas no banco, esta instrução remove antes de reindexar:
+DELETE FROM public.especies_peixes a USING public.especies_peixes b
+WHERE a.nome_popular = b.nome_popular AND a.created_at > b.created_at;
+
+INSERT INTO public.especies_peixes (nome_popular, nome_cientifico, porte_info, habitat_dica, imagem_url, icone, ordem)
 VALUES
-('Tucunaré Azul', 'Cichla piquiti', 'Até 65cm+ • Iscas de Superfície', 'Estruturas de paus e pedrais', 'fa-fish', 1),
-('Jaú Gigante', 'Zungaro zungaro', 'Até 60kg+ • Poços Profundos', 'Fundo de corredeiras e poços', 'fa-shield-halved', 2),
-('Surubim Pintado', 'Pseudoplatystoma corruscans', 'Corredeiras e Gargantas', 'Águas correntes e canais', 'fa-water', 3),
-('Bicuda Real', 'Boulengerella cuvieri', 'Veloz • Saltos Acrobáticos', 'Remansos e superfícies', 'fa-bolt', 4),
-('Apapá Amarelo', 'Pellona castelnaeana', 'Dourado do Tocantins • Fly', 'Superfície de canais abertos', 'fa-sun', 5)
-ON CONFLICT DO NOTHING;
+('Tucunaré Azul', 'Cichla piquiti', 'Até 65cm+ • Iscas de Superfície', 'Estruturas de paus e pedrais', 'assets/images/peixe-tucunare-azul.jpg', 'fa-fish', 1),
+('Jaú Gigante', 'Zungaro zungaro', 'Até 60kg+ • Poços Profundos', 'Fundo de corredeiras e poços', 'assets/images/peixe-jau-gigante.jpg', 'fa-shield-halved', 2),
+('Surubim Pintado', 'Pseudoplatystoma corruscans', 'Corredeiras e Gargantas', 'Águas correntes e canais', 'assets/images/peixe-surubim-pintado.jpg', 'fa-water', 3),
+('Bicuda Real', 'Boulengerella cuvieri', 'Veloz • Saltos Acrobáticos', 'Remansos e superfícies', 'assets/images/peixe-bicuda-real.jpg', 'fa-bolt', 4),
+('Apapá Amarelo', 'Pellona castelnaeana', 'Dourado do Tocantins • Fly', 'Superfície de canais abertos', 'assets/images/peixe-apapa-amarelo.jpg', 'fa-sun', 5)
+ON CONFLICT (nome_popular) DO UPDATE SET
+  imagem_url = EXCLUDED.imagem_url,
+  porte_info = EXCLUDED.porte_info,
+  habitat_dica = EXCLUDED.habitat_dica;
 
 -- Inserir Condição Inicial do Rio
 INSERT INTO public.condicoes_rio (temperatura_agua, nivel_status, clima, transparencia)

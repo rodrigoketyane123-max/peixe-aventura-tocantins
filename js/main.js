@@ -144,12 +144,23 @@ const FALLBACK_EXPERIENCIAS = [
   }
 ];
 
+const FISH_IMAGES_CLIENT = {
+  'tucunaré azul': 'assets/images/peixe-tucunare-azul.jpg',
+  'tucunare azul': 'assets/images/peixe-tucunare-azul.jpg',
+  'jaú gigante': 'assets/images/peixe-jau-gigante.jpg',
+  'jau gigante': 'assets/images/peixe-jau-gigante.jpg',
+  'surubim pintado': 'assets/images/peixe-surubim-pintado.jpg',
+  'bicuda real': 'assets/images/peixe-bicuda-real.jpg',
+  'apapá amarelo': 'assets/images/peixe-apapa-amarelo.jpg',
+  'apapa amarelo': 'assets/images/peixe-apapa-amarelo.jpg'
+};
+
 const FALLBACK_ESPECIES = [
-  { nome_popular: 'Tucunaré Azul', nome_cientifico: 'Cichla piquiti', porte_info: 'Até 65cm+ • Iscas de Superfície', icone: 'fa-fish' },
-  { nome_popular: 'Jaú Gigante', nome_cientifico: 'Zungaro zungaro', porte_info: 'Até 60kg+ • Poços Profundos', icone: 'fa-shield-halved' },
-  { nome_popular: 'Surubim Pintado', nome_cientifico: 'Pseudoplatystoma corruscans', porte_info: 'Corredeiras e Gargantas', icone: 'fa-water' },
-  { nome_popular: 'Bicuda Real', nome_cientifico: 'Boulengerella cuvieri', porte_info: 'Veloz • Saltos Acrobáticos', icone: 'fa-bolt' },
-  { nome_popular: 'Apapá Amarelo', nome_cientifico: 'Pellona castelnaeana', porte_info: 'Dourado do Tocantins • Fly', icone: 'fa-sun' }
+  { nome_popular: 'Tucunaré Azul', nome_cientifico: 'Cichla piquiti', porte_info: 'Até 65cm+ • Iscas de Superfície', imagem_url: 'assets/images/peixe-tucunare-azul.jpg', icone: 'fa-fish' },
+  { nome_popular: 'Jaú Gigante', nome_cientifico: 'Zungaro zungaro', porte_info: 'Até 60kg+ • Poços Profundos', imagem_url: 'assets/images/peixe-jau-gigante.jpg', icone: 'fa-shield-halved' },
+  { nome_popular: 'Surubim Pintado', nome_cientifico: 'Pseudoplatystoma corruscans', porte_info: 'Corredeiras e Gargantas', imagem_url: 'assets/images/peixe-surubim-pintado.jpg', icone: 'fa-water' },
+  { nome_popular: 'Bicuda Real', nome_cientifico: 'Boulengerella cuvieri', porte_info: 'Veloz • Saltos Acrobáticos', imagem_url: 'assets/images/peixe-bicuda-real.jpg', icone: 'fa-bolt' },
+  { nome_popular: 'Apapá Amarelo', nome_cientifico: 'Pellona castelnaeana', porte_info: 'Dourado do Tocantins • Fly', imagem_url: 'assets/images/peixe-apapa-amarelo.jpg', icone: 'fa-sun' }
 ];
 
 const FALLBACK_RIO = {
@@ -211,21 +222,35 @@ function renderExperiencias(lista) {
   initCategoryFilters();
 }
 
-/** Renderiza as espécies de peixes */
+/** Renderiza as espécies de peixes sem duplicatas com foto de alta qualidade */
 function renderEspecies(lista) {
   const container = document.querySelector('.species-scroll-container');
   if (!container || !lista || lista.length === 0) return;
 
-  container.innerHTML = lista.map(esp => `
+  // Deduplicação estrita no frontend
+  const seen = new Set();
+  const unicos = [];
+  for (const esp of lista) {
+    const key = (esp.nome_popular || '').toLowerCase().trim();
+    if (!seen.has(key)) {
+      seen.add(key);
+      unicos.push(esp);
+    }
+  }
+
+  container.innerHTML = unicos.map(esp => {
+    const key = (esp.nome_popular || '').toLowerCase().trim();
+    const imgSrc = esp.imagem_url || FISH_IMAGES_CLIENT[key] || 'assets/images/peixe-tucunare-azul.jpg';
+    return `
     <div class="species-box">
-      <div class="species-icon-wrap">
-        <i class="fa-solid ${esp.icone || 'fa-fish'}"></i>
+      <div class="species-img-wrap">
+        <img src="${imgSrc}" alt="${esp.nome_popular} - Peixe Aventura Tocantins" loading="lazy">
       </div>
       <h3 class="species-name">${esp.nome_popular}</h3>
       <p class="species-tech-name">${esp.nome_cientifico}</p>
       <span class="species-badge">${esp.porte_info}</span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 /** Atualiza o widget de condições do Rio Tocantins */

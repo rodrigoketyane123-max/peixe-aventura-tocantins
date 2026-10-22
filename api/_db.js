@@ -55,7 +55,18 @@ async function getExperienciaBySlug(slug) {
   return data;
 }
 
-/** Lista espécies de peixes, ordenadas */
+const FISH_IMAGES_MAP = {
+  'tucunaré azul': 'assets/images/peixe-tucunare-azul.jpg',
+  'tucunare azul': 'assets/images/peixe-tucunare-azul.jpg',
+  'jaú gigante': 'assets/images/peixe-jau-gigante.jpg',
+  'jau gigante': 'assets/images/peixe-jau-gigante.jpg',
+  'surubim pintado': 'assets/images/peixe-surubim-pintado.jpg',
+  'bicuda real': 'assets/images/peixe-bicuda-real.jpg',
+  'apapá amarelo': 'assets/images/peixe-apapa-amarelo.jpg',
+  'apapa amarelo': 'assets/images/peixe-apapa-amarelo.jpg'
+};
+
+/** Lista espécies de peixes, ordenadas e sem duplicatas, com imagem */
 async function getEspeciesPeixes() {
   if (!supabase) throw new Error('Supabase não conectado. Configure SUPABASE_URL e SUPABASE_ANON_KEY nas variáveis de ambiente.');
   const { data, error } = await supabase
@@ -63,7 +74,17 @@ async function getEspeciesPeixes() {
     .select('*')
     .order('ordem', { ascending: true });
   if (error) throw error;
-  return data;
+
+  const uniqueMap = new Map();
+  for (const esp of (data || [])) {
+    const key = (esp.nome_popular || '').toLowerCase().trim();
+    if (!uniqueMap.has(key)) {
+      esp.imagem_url = esp.imagem_url || FISH_IMAGES_MAP[key] || 'assets/images/peixe-tucunare-azul.jpg';
+      uniqueMap.set(key, esp);
+    }
+  }
+
+  return Array.from(uniqueMap.values());
 }
 
 /** Busca o registro mais recente das condições do Rio Tocantins */
