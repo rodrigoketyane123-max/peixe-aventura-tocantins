@@ -40,6 +40,8 @@ Na tela de configuração do projeto antes de clicar em Deploy, expanda a seçã
 
 > 💡 **Nota:** Não é necessário alterar a pasta raiz (*Root Directory*) nem comandos de build. O arquivo `vercel.json` e o `package.json` já possuem as instruções automáticas.
 
+> O `server.js` é usado somente para execução local e é excluído do deploy. A Vercel publica o `index.html` e os arquivos estáticos, e executa os endpoints da pasta `api/` como Serverless Functions.
+
 ### Passo 4: Concluir o Deploy
 Clique em **"Deploy"**. Em cerca de 30 a 60 segundos, seu site estará no ar com link HTTPS e CDN global!
 

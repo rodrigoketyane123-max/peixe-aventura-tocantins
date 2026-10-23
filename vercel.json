@@ -1,42 +1,64 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "headers": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
-      ]
+      "src": "index.html",
+      "use": "@vercel/static"
     },
     {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "src": "assets/**/*",
+      "use": "@vercel/static"
     },
     {
-      "source": "/css/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
-      ]
+      "src": "css/**/*",
+      "use": "@vercel/static"
     },
     {
-      "source": "/js/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
-      ]
+      "src": "js/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/experiencias/:slug",
-      "destination": "/api/experiencias?slug=:slug"
+      "src": "/api/experiencias/([^/]+)",
+      "dest": "/api/experiencias?slug=$1"
     },
     {
-      "source": "/api/reservas/:voucher",
-      "destination": "/api/reservas?voucher=:voucher"
+      "src": "/api/reservas/([^/]+)",
+      "dest": "/api/reservas?voucher=$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/css/(.*)",
+      "headers": { "Cache-Control": "public, max-age=86400" },
+      "dest": "/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "headers": { "Cache-Control": "public, max-age=86400" },
+      "dest": "/js/$1"
+    },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "dest": "/index.html"
     }
   ]
 }

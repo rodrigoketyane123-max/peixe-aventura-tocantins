@@ -2,7 +2,6 @@
   "name": "peixe-aventura-tocantins",
   "version": "1.0.0",
   "description": "Portal de Ecoturismo, Pesca Esportiva e Acampamentos no Rio Tocantins em Peixe - TO integrado ao Supabase",
-  "main": "server.js",
   "scripts": {
     "build": "echo 'Build OK'",
     "start": "node server.js",
